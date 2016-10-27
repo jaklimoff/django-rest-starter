@@ -13,7 +13,8 @@ urlpatterns = [
                   # Django Admin, use {% url 'admin:index' %}
                   url(settings.ADMIN_URL, include(admin.site.urls)),
                   url(r'^docs/', include('rest_framework_docs.urls')),
-                  url(r'^api/v1/', include('apps.api.urls', namespace='v1')),
+                  url(r'^api/v1/', include('apps.api_urls', namespace='v1')),
+                  url(r'^accounts/', include('allauth.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
@@ -28,5 +29,5 @@ if settings.DEBUG:
     ]
 
 urlpatterns += [
-    url(r'^.*$', TemplateView.as_view(template_name='index.html'), name='home'),
+    # url(r'^.*$', TemplateView.as_view(template_name='index.html'), name='home'),
 ]

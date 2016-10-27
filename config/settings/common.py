@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'allauth.socialaccount.providers.google',
     'easy_thumbnails',  # to handle avatars
 )
 
@@ -52,7 +53,6 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     # custom users app
     'apps.users.apps.UsersConfig',
-    'apps.api.apps.ApiConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -251,7 +251,7 @@ ADMIN_URL = r'^admin/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -276,9 +276,18 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
-        # 'user': 'apps.api.serializers.UserSerializer',
-        # 'login': 'apps.api.serializers.AuthTokenSerializer',
-        # 'user_registration': 'apps.api.serializers.UserRegistrationSerializer',
+        'activation': 'djoser.serializers.ActivationSerializer',
+        'login': 'djoser.serializers.LoginSerializer',
+        'password_reset': 'djoser.serializers.PasswordResetSerializer',
+        'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',
+        'password_reset_confirm_retype': 'djoser.serializers.PasswordResetConfirmRetypeSerializer',
+        'set_password': 'djoser.serializers.SetPasswordSerializer',
+        'set_password_retype': 'djoser.serializers.SetPasswordRetypeSerializer',
+        'set_username': 'djoser.serializers.SetUsernameSerializer',
+        'set_username_retype': 'djoser.serializers.SetUsernameRetypeSerializer',
+        'user_registration': 'djoser.serializers.UserRegistrationSerializer',
+        'user': 'djoser.serializers.UserSerializer',
+        'token': 'djoser.serializers.TokenSerializer',
     },
 }
 
